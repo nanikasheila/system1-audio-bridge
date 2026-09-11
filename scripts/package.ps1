@@ -31,8 +31,10 @@ $bundle = Join-Path $buildRoot 'System1Bridge_artefacts/Release/VST3/SYSTEM-1 Au
 $helper = Join-Path $buildRoot 'System1Capture_artefacts/Release/System1Capture.exe'
 $moduleInfo = Join-Path $bundle 'Contents/Resources/moduleinfo.json'
 if (!(Test-Path -LiteralPath $helper) -or !(Test-Path -LiteralPath $moduleInfo)) { throw 'Release binaries are missing.' }
-$info = Get-Content -LiteralPath $moduleInfo -Raw | ConvertFrom-Json
-if ($info.Version -ne $version) { throw 'Built plugin version differs from project version.' }
+# JUCE's moduleinfo.json permits trailing commas, rejected by PowerShell 5.1.
+# Only the generated top-level version is needed for this packaging check.
+$builtVersion = [regex]::Match([IO.File]::ReadAllText($moduleInfo), '(?m)^\s*"Version"\s*:\s*"([0-9.]+)"').Groups[1].Value
+if ($builtVersion -ne $version) { throw 'Built plugin version differs from project version.' }
 New-Item -ItemType Directory -Path $outRoot -Force | Out-Null
 $tempRoot = Join-Path ([IO.Path]::GetTempPath()) ('system1-package-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $tempRoot | Out-Null
