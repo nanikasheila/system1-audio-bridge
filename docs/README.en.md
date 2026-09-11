@@ -15,6 +15,8 @@ System1Capture.exe
 
 Keep the helper **beside the bundle**, not inside it. Add that directory to your DAW's VST3 search paths and rescan. Add the plugin to an instrument track. The binary is unsigned; it uses the static Microsoft C++ runtime.
 
+**You do not need to launch `System1Capture.exe` manually before using the VST.** The plugin starts it automatically in the background when needed, without opening a helper window. Keep it beside the `.vst3` folder as shown above. Enable the DAW audio engine and plugin to capture audio.
+
 Connect the SYSTEM-1 by USB. Look for `USB connected` and `USB MIDI ready`. Hold the hardware MANUAL button to receive current controls. `*` marks an unsynced value. Choose **VOICE MODE → Poly** for chords. To synchronize tempo, choose `DAW tempo` and set the hardware MIDI Clock Source to `AUTO`.
 
 ## Presets
