@@ -1,0 +1,15 @@
+/build*/
+/dist/
+/dependencies/
+/work/
+/.vs/
+*.user
+*.suo
+*.pdb
+*.wav
+*.PRM
+*.prm
+*.s1preset
+*.meta.json
+*.bwproject
+*.log
